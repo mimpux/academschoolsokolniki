@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="referrer" content="unsafe-url">
+    <title>Академическая гимназия - 5Б класс</title>
+    <link rel="icon" href="Akademiceskaa-Gimnazia-LOGO2-6583166ec4934.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://th.bing.com/th/id/OIP.TcNZCfUUNwA_hEqzuxrL6QHaEK?rs=1&pid=ImgDetMain");
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eaeaea;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-success {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d35400;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status-bar {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            background: #ecf0f1;
+            display: none;
+        }
+
+        .status-active {
+            background: #d5f4e6;
+            color: #27ae60;
+            display: block;
+        }
+
+        .status-error {
+            background: #fadbd8;
+            color: #c0392b;
+            display: block;
+        }
+
+        .status-warning {
+            background: #fef9e7;
+            color: #f39c12;
+            display: block;
+        }
+
+        .video-conference {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .local-video-container {
+            width: 100%;
+            background: #2c3e50;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .local-video-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            z-index: 10;
+        }
+
+        #localVideo {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .jitsi-container {
+            width: 100%;
+            background: #34495e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            display: block;
+        }
+
+        .device-selector {
+            display: none;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .device-selector.active {
+            display: block;
+        }
+
+        .device-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #bdc3c7;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .info-box {
+            background: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            iframe {
+                height: 400px;
+            }
+
+            .device-options {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+        .class-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .class-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 100px;
+            transition: all 0.3s ease;
+        }
+        .class-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .class-btn:nth-child(odd) {
+            background: #28a745;
+        }
+        .class-btn:nth-child(odd):hover {
+            background: #1e7e34;
+        }
+        .class-btn:nth-child(3n) {
+            background: #ffc107;
+            color: #212529;
+        }
+        .class-btn:nth-child(3n):hover {
+            background: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>5Б класс - Видеоконференция</h1>
+            <p class="subtitle">Академическая гимназия - Онлайн урок</p>
+            <a href="index.html" class="class-btn">Вернуться обратно</a>
+        </div>
+
+        <div id="statusBar" class="status-bar"></div>
+
+            <div class="jitsi-container">
+                <iframe
+                    id="jitsiFrame"
+                    src="https://meet.jit.si/a%D1%81%D0%B0d%D0%B5m-s%D1%81h%D0%BE%D0%BEl-5%D0%B1-%D1%81l%D0%B0ss"
+                    allow="camera; microphone; display-capture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Элементы DOM
+        const requestMediaBtn = document.getElementById('requestMediaBtn');
+        const showDevicesBtn = document.getElementById('showDevicesBtn');
+        const stopMediaBtn = document.getElementById('stopMediaBtn');
+        const statusBar = document.getElementById('statusBar');
+        const localVideo = document.getElementById('localVideo');
+        const videoSelect = document.getElementById('videoSelect');
+        const audioSelect = document.getElementById('audioSelect');
+        const deviceSelector = document.getElementById('deviceSelector');
+        const jitsiFrame = document.getElementById('jitsiFrame');
+
+        // Переменные
+        let mediaStream = null;
+        let videoDevices = [];
+        let audioDevices = [];
+
+        // Функция обновления статуса
+        function updateStatus(message, type = '') {
+            statusBar.textContent = message;
+            statusBar.className = 'status-bar';
+
+            if (type) {
+                statusBar.classList.add(`status-${type}`);
+            }
+
+            console.log('Статус:', message);
+        }
+
+        // Функция обновления состояния кнопок
+        function updateButtons(hasStream) {
+            requestMediaBtn.disabled = hasStream;
+            showDevicesBtn.disabled = !hasStream;
+            stopMediaBtn.disabled = !hasStream;
+
+            if (hasStream) {
+                deviceSelector.classList.add('active');
+            }
+        }
+
+        // Функция получения списка устройств
+        async function getDevices() {
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+
+                videoDevices = devices.filter(d => d.kind === 'videoinput');
+                audioDevices = devices.filter(d => d.kind === 'audioinput');
+
+                // Обновляем список камер
+                videoSelect.innerHTML = '<option value="">Выберите камеру</option>';
+                videoDevices.forEach(device => {
+                    const option = document.createElement('option');
+                    option.value = device.deviceId;
+                    option.text = device.label || `Камера ${videoSelect.options.length}`;
+                    videoSelect.appendChild(option);
+                });
+
+                // Обновляем список микрофонов
+                audioSelect.innerHTML = '<option value="">Выберите микрофон</option>';
+                audioDevices.forEach(device => {
+                    const option = document.createElement('option');
+                    option.value = device.deviceId;
+                    option.text = device.label || `Микрофон ${audioSelect.options.length}`;
+                    audioSelect.appendChild(option);
+                });
+
+                console.log('Найдены устройства:', devices.length);
+            } catch (error) {
+                console.error('Ошибка при получении устройств:', error);
+            }
+        }
+
+        // Функция запроса доступа к медиа
+        async function requestMedia(constraints = null) {
+            try {
+                updateStatus('Запрашиваю доступ к камере и микрофону...', 'warning');
+
+                // Останавливаем предыдущий поток
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(track => track.stop());
+                }
+
+                // Определяем constraints
+                const defaultConstraints = {
+                    video: {
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 },
+                        facingMode: "user"
+                    },
+                    audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true
+                    }
+                };
+
+                const mediaConstraints = constraints || defaultConstraints;
+
+                // Запрашиваем доступ
+                mediaStream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
+
+                // Отображаем локальное видео
+                localVideo.srcObject = mediaStream;
+
+                // Обновляем UI
+                updateStatus('✅ Доступ к камере и микрофону разрешен', 'active');
+                updateButtons(true);
+
+                // Получаем список устройств
+                await getDevices();
+
+                // Выбираем текущие устройства в списках
+                if (mediaStream) {
+                    const videoTrack = mediaStream.getVideoTracks()[0];
+                    const audioTrack = mediaStream.getAudioTracks()[0];
+
+                    if (videoTrack) {
+                        const settings = videoTrack.getSettings();
+                        if (settings.deviceId) {
+                            videoSelect.value = settings.deviceId;
+                        }
+                    }
+
+                    if (audioTrack) {
+                        const settings = audioTrack.getSettings();
+                        if (settings.deviceId) {
+                            audioSelect.value = settings.deviceId;
+                        }
+                    }
+                }
+
+                // Перезагружаем Jitsi iframe для доступа к устройствам
+                setTimeout(() => {
+                    jitsiFrame.src = jitsiFrame.src;
+                    updateStatus('Jitsi Meet обновлен. Теперь можно присоединиться к конференции.', 'active');
+                }, 1000);
+
+                return mediaStream;
+
+            } catch (error) {
+                console.error('Ошибка доступа к медиа:', error);
+
+                let errorMessage = 'Ошибка: ';
+                if (error.name === 'NotAllowedError') {
+                    errorMessage = '❌ Доступ к камере/микрофону запрещен. Разрешите доступ в настройках браузера.';
+                } else if (error.name === 'NotFoundError') {
+                    errorMessage = '❌ Камера или микрофон не найдены.';
+                } else if (error.name === 'NotReadableError') {
+                    errorMessage = '❌ Устройство используется другим приложением.';
+                } else {
+                    errorMessage += error.message;
+                }
+
+                updateStatus(errorMessage, 'error');
+                updateButtons(false);
+                return null;
+            }
+        }
+
+        // Функция остановки медиа
+        function stopMedia() {
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(track => track.stop());
+                mediaStream = null;
+                localVideo.srcObject = null;
+
+                updateStatus('Камера и микрофон отключены', 'warning');
+                updateButtons(false);
+                deviceSelector.classList.remove('active');
+            }
+        }
+
+        // Функция смены устройства
+        async function changeDevice(deviceId, type) {
+            if (!mediaStream) return;
+
+            try {
+                const constraints = {};
+
+                if (type === 'video') {
+                    constraints.video = { deviceId: { exact: deviceId } };
+
+                    // Сохраняем текущие аудио настройки
+                    const audioTrack = mediaStream.getAudioTracks()[0];
+                    if (audioTrack) {
+                        constraints.audio = { deviceId: { exact: audioTrack.getSettings().deviceId } };
+                    }
+                } else if (type === 'audio') {
+                    constraints.audio = { deviceId: { exact: deviceId } };
+
+                    // Сохраняем текущие видео настройки
+                    const videoTrack = mediaStream.getVideoTracks()[0];
+                    if (videoTrack) {
+                        constraints.video = { deviceId: { exact: videoTrack.getSettings().deviceId } };
+                    }
+                }
+
+                await requestMedia(constraints);
+
+            } catch (error) {
+                console.error('Ошибка при смене устройства:', error);
+                updateStatus('Ошибка при смене устройства', 'error');
+            }
+        }
+
+        // Обработчики событий
+        requestMediaBtn.addEventListener('click', () => requestMedia());
+        showDevicesBtn.addEventListener('click', () => {
+            deviceSelector.classList.toggle('active');
+        });
+        stopMediaBtn.addEventListener('click', stopMedia);
+
+        videoSelect.addEventListener('change', (e) => {
+            if (e.target.value) {
+                changeDevice(e.target.value, 'video');
+            }
+        });
+
+        audioSelect.addEventListener('change', (e) => {
+            if (e.target.value) {
+                changeDevice(e.target.value, 'audio');
+            }
+        });
+
+        // Проверка поддержки API при загрузке
+        window.addEventListener('load', () => {
+            // Проверяем поддержку getUserMedia
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                updateStatus('Ваш браузер не поддерживает доступ к камере и микрофону', 'error');
+                requestMediaBtn.disabled = true;
+                return;
+            }
+
+            updateStatus('Готов к работе. Нажмите "Разрешить камеру и микрофон"', '');
+
+            // Автоматически запрашиваем доступ (опционально)
+            // requestMedia();
+
+            // Отслеживаем изменения устройств
+            navigator.mediaDevices.addEventListener('devicechange', getDevices);
+        });
+
+        // Обработка сообщений от Jitsi iframe
+        window.addEventListener('message', (event) => {
+            // Можно добавить обработку сообщений от Jitsi
+            console.log('Сообщение от iframe:', event.data);
+        });
+
+        // Автоматическое обновление Jitsi при успешном доступе к медиа
+        let jitsiReloaded = false;
+
+        // Проверяем периодически доступ к медиа и обновляем Jitsi
+        setInterval(() => {
+            if (mediaStream && !jitsiReloaded) {
+                const hasVideo = mediaStream.getVideoTracks().length > 0;
+                const hasAudio = mediaStream.getAudioTracks().length > 0;
+
+                if (hasVideo && hasAudio) {
+                    jitsiReloaded = true;
+                    // Jitsi уже должен иметь доступ через родительскую страницу
+                }
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

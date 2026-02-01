@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="referrer" content="unsafe-url">
+    <title>Академическая гимназия</title>
+    <link rel="icon" href="Akademiceskaa-Gimnazia-LOGO2-6583166ec4934.png">
+    <script type="s.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://th.bing.com/th/id/OIP.TcNZCfUUNwA_hEqzuxrL6QHaEK?rs=1&pid=ImgDetMain");
+            margin: 0;
+            padding: 10px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .news {
+            max-width: 800px;
+            margin: auto;
+            background: grey;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+        }
+        p {
+            line-height: 1.6;
+            color: #555;
+        }
+        .class-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .class-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 100px;
+            transition: all 0.3s ease;
+        }
+        .class-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .class-btn:nth-child(odd) {
+            background: #28a745;
+        }
+        .class-btn:nth-child(odd):hover {
+            background: #1e7e34;
+        }
+        .class-btn:nth-child(3n) {
+            background: #ffc107;
+            color: #212529;
+        }
+        .class-btn:nth-child(3n):hover {
+            background: #e0a800;
+        }
+        marquee{
+            font-family: Arial, sans-serif;
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 20px;
+        }
+        li{
+            font-family: Segoe UI;
+            color: black
+        }
+        h3{
+            color: black
+        }
+        .block {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        }
+        summary {
+  border: 4px solid transparent;
+  outline: none;
+  &:focus {
+    border-color: white;
+  }
+  padding: 1rem;
+  display: block;
+  background: #00CED1;
+  color: black;
+  padding-left: 2.2rem;
+  position: relative;
+  cursor: pointer;
+}
+details {
+  max-width: 500px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  background: #78DBE2;
+}
+details summary::-webkit-details-marker {
+  display:none;
+}
+details[open] > summary:before {
+  transform: rotate(90deg);
+}
+summary:before {
+  content: '';
+  border-width: .4rem;
+  border-style: solid;
+  border-color: transparent transparent transparent #fff;
+  position: absolute;
+  top: 1.3rem;
+  left: 1rem;
+  transform: rotate(0);
+  transform-origin: .2rem 50%;
+  transition: .25s transform ease;
+}
+
+
+
+.content {
+  border-top: none;
+  padding: 10px;
+  border: 2px solid #888;
+  border-top: none;
+}
+
+p {
+  margin: 0;
+  padding-bottom: 10px;
+  &:last-child {
+    padding: 0;
+  }
+}
+img {
+  max-width: 100%;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+        h2{
+             font-family: Times New Roman, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Платформа дистанционного обучения</h1>
+        <details>
+            <summary>Выберите класс</summary>
+            <div class="class-buttons">
+                <a href="5а.html" class="class-btn">5«А»</a>
+                <a href="5б.html" class="class-btn">5«Б»</a>
+                <a href="5в.html" class="class-btn">5«В»</a>
+                <a href="6а.html" class="class-btn">6«А»</a>
+                <a href="6б.html" class="class-btn">6«Б»</a>
+                <a href="6в.html" class="class-btn">6«В»</a>
+                <a href="7а.html" class="class-btn">7«А»</a>
+                <a href="7б.html" class="class-btn">7«Б»</a>
+                <a href="8а.html" class="class-btn">8«А»</a>
+                <a href="8б.html" class="class-btn">8«Б»</a>
+                <a href="9а.html" class="class-btn">9«А»</a>
+                <a href="10а.html" class="class-btn">10«А»</a>
+                <a href="11а.html" class="class-btn">11«А»</a>
+            </div>
+        </details>
+        <p>Автор: Михаил Алексеев</p>
+    </div>
+
+    <script>
+        // Дополнительный скрипт для управления кнопками классов
+        document.addEventListener('DOMContentLoaded', function() {
+            // Пример: можно добавить функциональность для кнопок
+            const classButtons = document.querySelectorAll('.class-btn');
+
+            classButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Можно добавить дополнительную логику здесь
+                    console.log('Переход на страницу класса: ' + this.textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
